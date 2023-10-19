@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\Time;
-use App\Filament\Resources\MeetingResource\Pages;
+use App\Filament\Resources\MeetingResource\Pages\ManageMeetings;
 use App\Models\Game\Meeting;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -20,6 +20,7 @@ class MeetingResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(1)
             ->schema([
                 TextInput::make('name')
                     ->required()
@@ -28,14 +29,16 @@ class MeetingResource extends Resource
                     ->unique('meetings', 'name'),
                 Select::make('time')
                     ->required()
-                    ->options(Time::class),
+                    ->options(Time::class)
+                    ->searchable()
+                ,
             ]);
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageMeetings::route('/'),
+            'index' => ManageMeetings::route('/'),
         ];
     }
 }

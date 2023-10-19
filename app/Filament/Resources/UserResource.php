@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\Pages\ManageUsers;
 use App\Models\User;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -27,6 +27,7 @@ class UserResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(1)
             ->schema([
                 TextInput::make('name')
                     ->required()
@@ -107,7 +108,7 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageUsers::route('/'),
+            'index' => ManageUsers::route('/'),
         ];
     }
 }
