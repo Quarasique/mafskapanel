@@ -2,7 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\MeetingResource;
+use App\Enums\Alignment;
+use App\Filament\Resources\RoleResource;
 use App\Filament\Resources\UserResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -12,7 +13,6 @@ use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->sidebarCollapsibleOnDesktop()
+            ->breadcrumbs(false)
             ->default()
             ->id('admin')
             ->path('admin')
@@ -45,7 +47,7 @@ class AdminPanelProvider extends PanelProvider
                         ]),
                     NavigationGroup::make('Roles')
                         ->items([
-                            ...MeetingResource::getNavigationItems(),
+                            ...RoleResource::getNavigationItems(),
                         ]),
                 ]);
             })
@@ -64,6 +66,11 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+            ])
+            ->colors([
+                Alignment::Village->name => Color::Sky,
+                Alignment::Mafia->name => Color::Red,
+                Alignment::ThirdParty->name => Color::Yellow,
             ])
             ->authMiddleware([
                 Authenticate::class,

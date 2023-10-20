@@ -32,6 +32,11 @@ use Illuminate\Support\Carbon;
  */
 class Role extends Model
 {
+    protected $fillable = [
+        'name',
+        'alignment',
+    ];
+
     protected $casts = [
         'alignment' => Alignment::class,
     ];

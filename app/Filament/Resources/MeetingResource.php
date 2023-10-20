@@ -30,8 +30,7 @@ class MeetingResource extends Resource
                 Select::make('time')
                     ->required()
                     ->options(Time::class)
-                    ->searchable()
-                ,
+                    ->searchable(),
             ]);
     }
 
