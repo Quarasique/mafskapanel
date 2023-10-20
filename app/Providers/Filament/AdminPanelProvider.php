@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Enums\Alignment;
+use App\Filament\Resources\MeetingResource;
 use App\Filament\Resources\RoleResource;
 use App\Filament\Resources\UserResource;
 use Filament\Http\Middleware\Authenticate;
@@ -48,6 +49,7 @@ class AdminPanelProvider extends PanelProvider
                     NavigationGroup::make('Roles')
                         ->items([
                             ...RoleResource::getNavigationItems(),
+                            ...MeetingResource::getNavigationItems(),
                         ]),
                 ]);
             })

@@ -35,6 +35,7 @@ class Meeting extends Model
     protected $fillable = [
         'name',
         'time',
+        'solo',
     ];
 
     protected $casts = [

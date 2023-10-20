@@ -4,8 +4,7 @@ namespace App\Filament\Resources\RoleResource\RelationManagers;
 
 use App\Enums\Time;
 
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\MeetingResource\Configuration;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\AttachAction;
@@ -15,7 +14,6 @@ use Filament\Tables\Actions\DetachAction;
 use Filament\Tables\Actions\DetachBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class MeetingsRelationManager extends RelationManager
@@ -26,27 +24,18 @@ class MeetingsRelationManager extends RelationManager
     {
         return $form
             ->columns(1)
-            ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->minLength(4)
-                    ->maxLength(64)
-                    ->unique('meetings', 'name'),
-                Select::make('time')
-                    ->required()
-                    ->options(Time::class)
-                    ->searchable(),
-            ]);
+            ->schema(
+                Configuration::schema()
+            );
     }
 
     public function table(Table $table): Table
     {
         return $table
             ->recordTitleAttribute('name')
-            ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('time'),
-            ])
+            ->columns(
+                Configuration::columns()
+            )
             ->headerActions([
                 CreateAction::make(),
                 AttachAction::make()
