@@ -15,6 +15,18 @@ enum Time {
   Evening
 }
 
+enum Targets {
+  All
+  Village
+  Mafia
+  ThirdParty
+  NonVillage
+  NonMafia
+  NonThirdParty
+  Self
+  NonSelf
+}
+
 """
 The `ID` scalar type represents a unique identifier, often used to
 refetch an object or as key for a cache. The ID type appears in a JSON
@@ -67,15 +79,6 @@ type PaginatorInfo {
   total: Int!
 }
 
-"A paginated list of User items."
-type UserPaginator {
-  "Pagination information about the list of items."
-  paginatorInfo: PaginatorInfo!
-
-  "A list of User items."
-  data: [User!]!
-}
-
 "A paginated list of Role items."
 type RolePaginator {
   "Pagination information about the list of items."
@@ -83,6 +86,15 @@ type RolePaginator {
 
   "A list of Role items."
   data: [Role!]!
+}
+
+"A paginated list of User items."
+type UserPaginator {
+  "Pagination information about the list of items."
+  paginatorInfo: PaginatorInfo!
+
+  "A list of User items."
+  data: [User!]!
 }
 
 "Directions for ordering a list of records."

@@ -8,6 +8,34 @@ Will be replaced by a generated type during schema manipulation.
 """
 scalar _
 
+# Directive class: App\GraphQL\Directives\IlikeDirective
+"""
+Add a `ILIKE` conditional to a database query.
+"""
+directive @ilike(
+  """
+  Specify the database column to compare.
+  Required if the directive is:
+  - used on an argument and the database column has a different name
+  - used on a field
+  """
+  key: String
+
+  """
+  Fixate the positions of wildcards (`%`, `_`) in the ILIKE comparison around the
+  placeholder `{}`, e.g. `%{}`, `__{}` or `%{}%`.
+  If specified, wildcard characters in the client-given input are escaped.
+  If not specified, the client can pass wildcards unescaped.
+  """
+  template: String
+
+  """
+  Provide a value to compare against.
+  Only used when the directive is added on a field.
+  """
+  value: String
+) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+
 # Directive class: Nuwave\Lighthouse\Schema\Directives\AggregateDirective
 """
 Returns an aggregate of a column in a given relationship or model.
