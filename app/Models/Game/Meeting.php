@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 /**
  * App\Models\Game\Meeting
  *
+ * @property bool $solo
  * @property int $id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -24,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Meeting whereCreatedAt($value)
  * @method static Builder|Meeting whereId($value)
  * @method static Builder|Meeting whereName($value)
+ * @method static Builder|Meeting whereSolo($value)
  * @method static Builder|Meeting whereTime($value)
  * @method static Builder|Meeting whereUpdatedAt($value)
  * @property-read Collection<int, Role> $roles

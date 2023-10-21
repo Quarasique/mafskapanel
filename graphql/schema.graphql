@@ -1,0 +1,34 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+type Role {
+    id: ID!
+    name: String!
+    meetings: [Meeting] @belongsToMany(relation: "meetings")
+    alignment: Alignment!
+}
+
+type Meeting {
+    id: ID!
+    name: String!
+    solo: Boolean!
+    time: Time!
+}
+
+type Query {
+    user(id: ID! @eq): User @find
+    users: [User!]! @paginate
+    userSearch(
+        name: String @like(template: "%{}%"),
+        email: String @like(template: "%{}%")
+    ): [User] @paginate
+    roles: [Role]! @paginate
+    role(id: ID! @eq): Role @find
+    roleSearch(
+        name: String @like(template: "%{}"),
+        alignment: Alignment @eq
+    ): [Role] @paginate
+}
