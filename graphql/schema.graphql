@@ -1,9 +1,3 @@
-type User {
-    id: ID!
-    name: String!
-    email: String!
-}
-
 type Role {
     id: ID!
     name: String!
@@ -18,17 +12,23 @@ type Meeting {
     time: Time!
 }
 
+type User {
+    id: ID!
+    name: String!
+    email: String!
+}
+
 type Query {
+    roles: [Role]! @paginate
+    role(id: ID! @eq): Role @find
+    roleSearch(
+        name: String @like(template: "%{}%"),
+        alignment: Alignment @eq
+    ): [Role] @paginate
     user(id: ID! @eq): User @find
     users: [User!]! @paginate
     userSearch(
         name: String @like(template: "%{}%"),
         email: String @like(template: "%{}%")
     ): [User] @paginate
-    roles: [Role]! @paginate
-    role(id: ID! @eq): Role @find
-    roleSearch(
-        name: String @like(template: "%{}"),
-        alignment: Alignment @eq
-    ): [Role] @paginate
 }
