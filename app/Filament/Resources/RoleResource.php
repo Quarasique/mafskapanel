@@ -7,6 +7,7 @@ use App\Filament\Resources\RoleResource\Pages\EditRole;
 use App\Filament\Resources\RoleResource\Pages\ManageRoles;
 use App\Filament\Resources\RoleResource\RelationManagers\MeetingsRelationManager;
 use App\Models\Game\Role;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -45,6 +46,17 @@ class RoleResource extends Resource
                     ->required()
                     ->options(Alignment::class)
                     ->searchable(),
+                Group::make()
+                    ->columns(11)
+                    ->childComponents([
+                        TextInput::make('vote_weight')
+                            ->maxWidth(1)
+                            ->numeric()
+                            ->default(1)
+                            ->required()
+                            ->minValue(0)
+                            ->maxValue(10),
+                    ])
             ]);
     }
 

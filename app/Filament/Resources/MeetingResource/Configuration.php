@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\MeetingResource;
 
+use App\Enums\Targets;
 use App\Enums\Time;
 use App\Filament\Resources\Configurable;
 use Filament\Forms\Components\Select;
@@ -18,12 +19,16 @@ class Configuration implements Configurable
             TextInput::make('name')
                 ->required()
                 ->minLength(4)
-                ->maxLength(64)
-                ->unique('meetings', 'name'),
+                ->maxLength(64),
             Select::make('time')
                 ->required()
                 ->options(Time::class)
                 ->searchable(),
+            Select::make('targets')
+                ->required()
+                ->options(Targets::class)
+                ->searchable()
+                ->label('Possible targets'),
             Toggle::make('solo'),
         ];
     }
@@ -34,6 +39,8 @@ class Configuration implements Configurable
             TextColumn::make('name'),
             TextColumn::make('time'),
             ToggleColumn::make('solo'),
+            TextColumn::make('targets')
+                ->label('Possible targets'),
         ];
     }
 }

@@ -35,6 +35,7 @@ class Role extends Model
     protected $fillable = [
         'name',
         'alignment',
+        'vote_weight',
     ];
 
     protected $casts = [

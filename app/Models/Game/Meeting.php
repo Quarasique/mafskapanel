@@ -2,6 +2,7 @@
 
 namespace App\Models\Game;
 
+use App\Enums\Targets;
 use App\Enums\Time;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,10 +39,12 @@ class Meeting extends Model
         'name',
         'time',
         'solo',
+        'targets',
     ];
 
     protected $casts = [
         'time' => Time::class,
+        'targets' => Targets::class,
     ];
 
     public function roles(): BelongsToMany
