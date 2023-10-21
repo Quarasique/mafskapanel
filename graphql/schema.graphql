@@ -23,8 +23,8 @@ type User {
 type Query {
     roles: [Role]! @paginate(defaultCount: 10)
     role(id: ID! @eq): Role @find
-    roleSearch(name: String @ilike(template: "%{}%"), alignment: Alignment @eq): [Role] @paginate(defaultCount: 10)
+    roleSearch(name: String @ilike(template: "%{}%"), alignment: Alignment @eq): [Role!]! @paginate(defaultCount: 10)
     user(id: ID! @eq): User @find
     users: [User!]! @paginate(defaultCount: 10)
-    userSearch(name: String @ilike(template: "%{}%"),email: String @ilike(template: "%{}%")): [User] @paginate(defaultCount: 10)
+    userSearch(name: String @ilike(template: "%{}%"),email: String @ilike(template: "%{}%")): [User!]! @paginate(defaultCount: 10)
 }
